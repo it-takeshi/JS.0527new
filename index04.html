@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>家族診断</title>
+  <style>
+  
+  *{margin:0; padding: 0; list-style: none;}
+
+/* #questionは h1のこと */
+#question{
+  padding-top: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 25px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  color: brown;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+ul{
+  width: 600px;
+  margin:0 auto;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+li{
+text-align: center;
+background-color: #eee;
+font-size: 20px;
+color: brown;
+font-weight: bold;
+font-size: 25px;
+padding:10px 0;
+cursor: pointer;
+margin-bottom: 10px;
+font-family: serif;
+}
+
+.point{
+      margin-top: 100px;
+      display: none;
+      text-align: center;
+      font-size: 50px;
+      font-weight: bold;
+      color:red;
+    }
+    progress{
+      height: 40px;
+      width: 400px;
+      display: block;
+      margin:0 auto 40px;
+    }
+    .last_time{
+    font-size: 20px;
+
+    }
+
+    #kekka{
+      color: red;
+    }
+    .line{
+      width: 0%;
+      height: 1px;
+      background-color: #fff;
+      position: fixed;
+      top: 50%;
+      z-index: 3;
+    }
+    .up{
+      width: 100%;
+      height: 50%;
+      background-color: #000;
+      position: fixed;
+      z-index: 2;
+    }
+    .down{
+      width: 100%;
+      height: 50%;
+      background-color: #000;
+      position: fixed;
+      bottom: 0;
+      z-index: 2;
+    }
+
+    .img{
+      width:100%;
+      height: 100%;
+      display: none;
+      z-index: 1;  
+    }
+    .img img{
+      width: 100%;  
+    }
+    .img2{
+      display: none;
+    }
+
+  
+    .headTitle{
+      position: absolute;
+      top:20%;
+      left:15%;
+      transform:translate(-50%,-50%);
+      color: #fff;
+      font-size: 40px;
+      border: 2px,solid;
+      padding: 50px;
+      font-family: serif;
+    }
+  #start_btn {
+    width: 20px;
+    height: 30px;
+    position: fixed;
+    top:10px;
+    right: 20px;
+    background-color: indianred;
+    padding: 5px 10px;
+    display: inline-block;
+    border-radius: 5px;
+    opacity: 0.8;
+    z-index: 1;
+    cursor: pointer;
+}
+#start_btn:hover {
+    opacity: 1.0;
+}
+#start_btn:active {
+    background-color: tomato;
+    color: white;
+}
+
+
+.main_wrapper{
+  background-size: cover;
+  background: url(../JS0527/pattern.png)
+  
+}
+
+  </style>
+</head>
+
+<body>
+<div class="head_wrapper">
+  <div class="up"></div>
+  <div class="down"></div>
+  <div class="line"></div>
+  <div class="img">
+    <img src="/121-15-gallery-04.jpg" alt="">
+    <p class="headTitle"> </p>
+    <div><a id="start_btn"></a></div>
+  </div>
+</div>
+  
+<div class="main_wrapper">
+  <h1 id=question></h1>
+      <progress max="100" value="0"></progress>
+<ul></ul> 
+      <div class="point"><span data-point-num></span></div>
+      <div class="last_time" >前回の結果<span id="kekka"></span></div>
+    </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+  // chapter00
+$('#start_btn').click(function () {
+        $('.head_wrapper').hide();
+        $('.main_wrapper').show();
+});
+
+    $('.line').animate({"width":"100%"},1500,function () { 
+    $('.line').css("right",0);   
+      $('.line').animate({"width":"0%"},function(){
+        $('.up').animate({"height":"0%"});
+        $('.down').animate({"height":"0%"},1000,function(){
+          $('.img').fadeIn("slow");
+          $('.headTitle').fadeIn("slow");
+
+        });
+      });
+    })
+
+    $(function () {
+      let count =0;
+    let point = 0;
+      const questions=[
+        {
+            question:'第1問  何か運動する習慣を継続している？ ',
+            answer:2, 
+            choice:['1.週2回以上 ','2.週1回している ','3.あまりしてない ','4.全くない'
+          ]
+        },
+        {
+            question:'第2問 よく眠れてますか？', 
+            answer:1, 
+            choice:['1. その通り','2.まあ眠れている ','3.少し睡眠不足ぎみ ','4.眠れてない'
+          ]
+        },
+        {
+            question:'第3問 どこか体に不調がありますか？ ', 
+            answer:0,
+            choice:['1.特になし','2.少しある','3.不調を感じることが多い','4.かなりある '
+          ]
+        },
+        {
+            question:'第4問 	何か我慢してますか？ ',
+            answer:2, 
+            choice:['1.全くない','2.少しある.','3.我慢することが割と多い','4. 毎日我慢'
+          ]
+        },
+        {
+            question:'第5問 家族との時間は十分取れている？',
+            answer:2, 
+            choice:['1.十分取れている','2.まあ取れている','3.あまり取れていない','4.全く '
+          ]
+        },
+        {
+            question:'第6問  家族一緒で出かけることはありますか？',
+            answer:2, 
+            choice:['1.月1回以上ある','2.2.3か月に1回','半年に1回','4.年に1回 '
+          ]
+        },
+        {
+            question:'第7問 今の生活にストレスを感じていますか？',
+            answer:2, 
+            choice:['1.なし','2.あまり感じない','たまに感じることがある','4.常に '
+          ]
+        },
+        {
+            question:'第8問 自分がワクワクすることをできていますか？',
+            answer:2, 
+            choice:['1.できている','2.できつつある','3.あまりできてない','4.全くできない '
+          ]
+        },
+        {
+            question:'第9問 家族に対して言いたいことを伝えることができていますか？ ',
+            answer:2, 
+            choice:['1.できている','2.まあできている','3.あまりできてない','4.できてない '
+          ]
+        },
+        {
+            question:'第10問 家族との時間を楽しんでいますか？',
+            answer:2, 
+            choice:['1.十分楽しんでいる','2.楽しんでいる','あまり楽しめてない','4.楽しめてない'
+          ]
+        },
+      ];
+
+      if(localStorage.getItem('shindan')==null){
+      $('#kekka').text(記録はありません);
+      }else{
+      $('#kekka').text(localStorage.getItem('shindan'));
+
+      }
+        // h1はid=questionのこと#questionと同じ
+
+        function render(count){
+          $('li').remove();
+          $('#question').text(questions[count].question);
+          // $('#choice0_label').text(choice[count][0]);
+          // $('#choice0_label').text(choice[count][1]);
+          // $('#choice0_label').text(choice[count][2]);
+
+          questions[count]['choice'].forEach(function(text)  {
+          const li =`<li>${text}</li>`;
+          $('ul').append(li);
+          });      
+        }
+        render(0);
+
+        function pointGet(li_index) {
+          switch(li_index){
+            case 0:
+            return 3;
+            break;
+            case 1:
+            return 2;
+            break;
+            case 2:
+            return 1;
+            break;
+          }
+        }
+
+        function point_text(point){
+          let text =`頑張ろう！ `;
+          let view ='';
+          if(point<=8){
+            text='頑張ろう！'
+            
+          }
+          if(point>=9){
+            text='頑張ろう！2'
+          }
+          if(point>10){
+            text='頑張ろう！3'
+          }
+          if(point>12){
+            text='頑張ろう！4'
+          }
+          if(point>=16){
+            text ='頑張ろう！5'
+          }
+          return text;
+        }
+        
+        $('body').on('click','li',function() {
+          const li_index =$('li').index(this);
+          point += pointGet(li_index);
+          console.log(point);
+          if(count<questions.length-1){
+            count++;
+          render(count);
+          $('progress').val(100/(questions.length/count));
+          }else{
+            $('[data-point-num]').text(point_text(point));
+            localStorage.setItem('shindan',point_text(point));
+            $('ul,h1').hide();
+            $('.point').fadeIn();
+            $('progress').val(100);
+            $('.img').fadeIn("slow");
+            console.log('end');
+          }
+          
+        });
+    
+      });
+
+  </script>
+</body>
+
+</html>
+
+

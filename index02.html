@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p> 何か運動する習慣を継続していますか？</p>
+  <select class="question">
+<option selected disabled hidden>
+    
+    </option>
+  </select>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+$(function(){
+  /// 各optionのテキストとvalue値の配列
+  const optionCntList = [
+    { text: '週2回以上している', value: 'a' },
+    { text: '週1回程度', value: 'b' },
+    { text: 'あまりしていない', value: 'c' },
+    { text: 'ほとんどしてない', value: 'd'},
+  ]
+  
+  /// jQueryによるセレクトボックス初期化
+  var select = $('select.question');
+  var keys = Object.keys(optionCntList);
+  keys.forEach(function(key, i){
+    /// option要素を動的に生成＆追加
+    var content = this[key];
+    var option = $('<option>')
+      .text(content['text'])
+      .val(content['value']);
+    select.append(option);
+  }, optionCntList);
+})
+  </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+<!-- 診断 GS授業で習ったバージョンで作成 -->
+<p id="count">第1問</p>
+<p id="question"></p>
+<form action="" >
+  <p> 何か運動する習慣を継続していますか？</p>
+  <select name="choices"  value='0'>
+    <option value="0" id="choice00"></option>
+    <span id="choice00_s"></span>
+  </select>
+</form>
+
+<script>
+// 診断
+$(function(){
+      const questions = [ 
+      '何か運動する習慣を継続していますか？', 
+      'よく眠れてますか？', 
+      'どこか体に不調がありますか？'
+      ];
+      const choices = [
+      ['週2回以上している', '週1回程度', 'あまりしていない','ほとんどしてない'],
+      ['十分眠れている', '比較的眠れている', '少し睡眠不足ぎみ','眠れてない'],
+      ['特になし', '少しある', '不調を感じることが多い','かなりある']
+      ];
+    // 正解の定義
+      const correctAnswer = [2, 1, 0];
+    // カウント用変数
+      let count =0;
+      let correct =0;
+    // 最初の問題と選択肢を表示
+      $('#question').text(questions[count]);
+      $('#choice00_s').text(choices[count][0]);
+      $('#choice01').text(choices[count][1]);
+      $('#choice02').text(choices[count][2]); 
+
+  });
+
+
+
+</script>
+  
+</body>
+</html>
