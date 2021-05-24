@@ -36,10 +36,11 @@
 
       <!-- BMIここまで -->
 
-      <!-- 診断 -->
+      <!-- 診断 大人1人目 -->    
+  
       <form action="question1">
         <p>何か運動する習慣を継続していますか？</p>
-          <select name="sel01">
+          <select id="sel01" name="sel01" >
             <option value="0">週2回以上 </option>
             <option value="1" selected>週1回している </option>
             <option value="2">あまりしてない</option>
@@ -48,7 +49,7 @@
       </form>
       <form action="question2">
           <p>よく眠れてますか？</p>
-          <select name="sel02">
+          <select id="sel02" name="sel02">
               <option value="0">眠れている</option>
               <option value="1" selected>まあ眠れている</option>
               <option value="2">少し睡眠不足ぎみ</option>
@@ -58,7 +59,7 @@
       
       <form action="question3">
           <p>どこか体に不調がありますか？</p>
-          <select name="sel03">
+          <select id="sel03" name="sel03">
             <option value="1">特になし</option>
             <option value="2" selected>少しある</option>
             <option value="3">不調を感じることが多い</option>
@@ -68,7 +69,7 @@
       
       <form action="question4">
         <p> 何か我慢してますか？</p>
-        <select name="sel04">
+        <select id="sel04" name="sel04">
           <option value="1">全くない</option>
           <option value="2" selected>少しある</option>
           <option value="3">我慢することが割と多い</option>
@@ -77,7 +78,7 @@
       </form>
       <form action="question5">
         <p>家族との時間は十分取れていますか？</p>
-        <select name="sel05">
+        <select id="sel05" name="sel05">
           <option value="1">十分取れている'</option>
           <option value="2" selected>まあ取れている</option>
           <option value="3">あまり取れていない</option>
@@ -87,7 +88,7 @@
       
       <form action="question6">
         <p>家族一緒で出かけることはありますか？</p>
-        <select name="sel06">
+        <select id="sel06" name="sel06">
           <option value="1">月1回以上ある</option>
           <option value="2" selected>2.3か月に1回</option>
           <option value="3">半年に1回</option>
@@ -97,7 +98,7 @@
       
       <form action="question7">
         <p>今の生活にストレスを感じていますか？</p>
-        <select name="sel07">
+        <select id="sel07" name="sel07">
           <option value="1">感じてない</option>
           <option value="2" selected>あまり感じない</option>
           <option value="3">少し感じている</option>
@@ -107,7 +108,7 @@
       
       <form action="question8">
         <p>自分がワクワクすることをやっていますか？</p>
-        <select name="sel08">
+        <select id="sel08" name="sel08">
           <option value="1">やっている</option>
           <option value="2" selected>やりつつある</option>
           <option value="3">あまりやれてない</option>
@@ -117,7 +118,7 @@
       
       <form action="question9">
         <p>言いたいことを伝えていますか？</p>
-        <select name="sel09">
+        <select id="sel09" name="sel09">
           <option value="1">伝えている</option>
           <option value="2" selected>だいたい伝えている</option>
           <option value="3">あまりできてない</option>
@@ -127,7 +128,7 @@
       
       <form action="question10">
         <p> 家族との時間を楽しんでいますか？</p>
-        <select name="sel10">
+        <select id="sel10" name="sel10">
           <option value="1">かなり楽しんでいる</option>
           <option value="2" selected>楽しんでいる</option>
           <option value="3">あまり楽しめてない</option>
@@ -185,9 +186,30 @@
 
       // BMI計算ここまで
 
-      // 診断
+      // 診断 question1のみの数値取得
+      $(function(){
+            $("#sel01").change(function(){
+                  let answer = $('#sel01').val();
+                  if(answer == '0'){
+                    console.log(answer);
+                  }
+                  else if(answer == '1'){
+                    console.log(answer);
+                  }
+                  else if(answer=='2'){
+                    console.log(answer);
+                  }
+                  else{
+                    console.log(answer);
+                  }
+            });
+            });
+
+
     
 
   </script>
 </body>
 </html>
+
+
