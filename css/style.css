@@ -1,3 +1,58 @@
+/* 
+font-family: vdl-yotag,sans-serif;
+font-weight: 500;
+font-style: normal; 
+
+font-family: maru-maru-gothic-alr-stdn,sans-serif;
+font-weight: 400;
+font-style: normal;
+
+font-family: tbudrgothic-std,sans-serif;
+font-weight: 700;
+font-style: normal;
+*/
+
+
+html{
+width: 100%;
+}
+
 body{
-  background: url(../img/pattern-1758377__480.webp)
+background: url(../img/back.jpg);
+background-position: left top;
+background-repeat: no-repeat;
+background-size: auto 100%;
+background-color:rgba(255,255,255,0.7);
+background-blend-mode:lighten;
+}
+
+.header{
+display: flex;
+font-family: tbudrgothic-std,sans-serif;
+font-weight: 700;
+font-style: normal;
+}
+
+.header_left{
+display: flex;
+font-size: 20px;
+}
+
+.header_right{
+display: flex;
+justify-content: flex-end;
+}
+
+#大項目{
+font-family: vdl-yotag,sans-serif;
+font-weight: 500;
+font-style: normal;
+}
+
+.health{
+  padding-left: 30px;
+}
+
+.bmi{
+  padding-left: 30px;
 }
